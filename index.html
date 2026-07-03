@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>首尔旅行攻略 2026.7.4 – 7.12</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap');
+
+  :root {
+    --primary: #2d3436;
+    --accent: #e17055;
+    --accent-light: #fab1a0;
+    --couple: #6c5ce7;
+    --couple-bg: #f3f0ff;
+    --boy: #0984e3;
+    --boy-bg: #e8f4fd;
+    --girl: #e84393;
+    --girl-bg: #fdf2f8;
+    --card-bg: #ffffff;
+    --page-bg: #fafafa;
+    --border: #eee;
+    --text: #2d3436;
+    --text-light: #636e72;
+    --shadow: 0 2px 16px rgba(0,0,0,0.06);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--page-bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ── */
+  .hero {
+    background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+    color: white;
+    padding: 60px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 70%, rgba(225,112,85,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(108,92,231,0.1) 0%, transparent 50%);
+  }
+  .hero h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2.6em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    position: relative;
+  }
+  .hero .subtitle {
+    font-size: 1.1em;
+    font-weight: 300;
+    margin-top: 12px;
+    opacity: 0.85;
+    position: relative;
+  }
+  .hero .meta {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero .meta span {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    padding: 8px 18px;
+    border-radius: 24px;
+    font-size: 0.9em;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .edit-hint {
+    text-align: center;
+    padding: 12px;
+    background: #fff3cd;
+    color: #856404;
+    font-size: 0.85em;
+    border-bottom: 1px solid #ffc107;
+  }
+
+  /* ── Container ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ── Section ── */
+  .section {
+    margin: 48px 0;
+  }
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--accent);
+    display: inline-block;
+  }
+
+  /* ── Day Card ── */
+  .day-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .day-card:hover { transform: translateY(-2px); }
+
+  .day-header {
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .day-header.couple-day { background: linear-gradient(135deg, var(--couple-bg), #fff); border-left: 5px solid var(--couple); }
+  .day-header.split-day  { background: linear-gradient(135deg, #f0f8ff, var(--girl-bg)); border-left: 5px solid var(--accent); }
+
+  .day-num {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2em;
+    font-weight: 700;
+    line-height: 1;
+    min-width: 48px;
+  }
+  .couple-day .day-num { color: var(--couple); }
+  .split-day .day-num  { color: var(--accent); }
+
+  .day-info { flex: 1; }
+  .day-date {
+    font-size: 0.85em;
+    color: var(--text-light);
+    font-weight: 500;
+  }
+  .day-title {
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .day-badge {
+    font-size: 0.75em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .badge-couple { background: var(--couple); color: white; }
+  .badge-split  { background: var(--accent); color: white; }
+  .badge-depart { background: var(--primary); color: white; }
+
+  .day-body {
+    padding: 0 28px 28px;
+  }
+
+  .toggle-icon {
+    font-size: 1.2em;
+    transition: transform 0.3s;
+    color: var(--text-light);
+  }
+  .day-card.collapsed .toggle-icon { transform: rotate(-90deg); }
+  .day-card.collapsed .day-body { display: none; }
+
+  /* ── Timeline ── */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: #dfe6e9;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding-left: 20px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--couple);
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--couple);
+  }
+  .split-section .timeline-item.boy-item::before  { background: var(--boy); box-shadow: 0 0 0 2px var(--boy); }
+  .split-section .timeline-item.girl-item::before { background: var(--girl); box-shadow: 0 0 0 2px var(--girl); }
+
+  .time-label {
+    font-size: 0.8em;
+    color: var(--text-light);
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .time-content {
+    margin-top: 4px;
+  }
+  .time-content strong {
+    font-weight: 600;
+    color: var(--text);
+  }
+  .time-detail {
+    font-size: 0.9em;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+
+  /* ── Split Day ── */
+  .split-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 700px) {
+    .split-container { grid-template-columns: 1fr; }
+  }
+
+  .split-section {
+    padding: 20px;
+    border-radius: 12px;
+  }
+  .split-section.boy  { background: var(--boy-bg); }
+  .split-section.girl { background: var(--girl-bg); }
+
+  .split-label {
+    font-weight: 700;
+    font-size: 0.9em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .split-label.boy  { color: var(--boy); }
+  .split-label.girl { color: var(--girl); }
+
+  /* ── Spot Card ── */
+  .spot {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 10px;
+    border-left: 3px solid var(--accent-light);
+  }
+  .spot-name {
+    font-weight: 600;
+    font-size: 0.95em;
+  }
+  .spot-detail {
+    font-size: 0.85em;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* ── Info Grid ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .info-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .info-card h3 {
+    font-size: 1em;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--accent);
+  }
+  .info-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .info-card li {
+    padding: 6px 0;
+    font-size: 0.9em;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+  }
+  .info-card li:last-child { border-bottom: none; }
+  .info-card li .icon { flex-shrink: 0; width: 20px; text-align: center; }
+
+  /* ── Weather ── */
+  .weather-bar {
+    background: linear-gradient(135deg, #74b9ff, #a29bfe);
+    color: white;
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .weather-bar .temp {
+    font-size: 2.8em;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .weather-bar .desc { font-size: 0.95em; opacity: 0.9; }
+  .weather-bar .tips { flex: 1; min-width: 200px; }
+  .weather-bar .tips li { font-size: 0.9em; margin-bottom: 4px; list-style: none; }
+
+  /* ── Cost Table ── */
+  .cost-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 0.9em;
+  }
+  .cost-table th {
+    background: var(--primary);
+    color: white;
+    padding: 10px 16px;
+    text-align: left;
+    font-weight: 500;
+  }
+  .cost-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .cost-table tr:nth-child(even) td { background: #f8f9fa; }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-light);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+  }
+
+  /* ── Editable highlight ── */
+  [contenteditable]:focus {
+    outline: 2px dashed var(--accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  /* ── Utilities ── */
+  .flex-center { display: flex; align-items: center; justify-content: center; }
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .text-sm { font-size: 0.85em; }
+  .text-light { color: var(--text-light); }
+
+  /* ── Checklist ── */
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+  .checklist li {
+    padding: 8px 0;
+    font-size: 0.9em;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist input[type="checkbox"] {
+    margin-top: 4px;
+    accent-color: var(--accent);
+    width: 16px;
+    height: 16px;
+  }
+
+  /* ── Transport Tag ── */
+  .transport {
+    display: inline-block;
+    background: #dfe6e9;
+    color: var(--primary);
+    font-size: 0.75em;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* ── Evening Card ── */
+  .evening-block {
+    background: linear-gradient(135deg, #2d3436, #636e72);
+    color: white;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-top: 16px;
+  }
+  .evening-block strong { color: #ffeaa7; }
+
+  /* ── Print ── */
+  @media print {
+    .hero { padding: 30px 20px; }
+    .edit-hint { display: none; }
+    .day-card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+    body { font-size: 11pt; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <h1>Seoul 首尔旅行攻略</h1>
+  <p class="subtitle">서울 여행 가이드 &middot; 2026 夏</p>
+  <div class="meta">
+    <span>Jul 4 (六) &rarr; Jul 12 (日)</span>
+    <span>情侣 &middot; 25岁</span>
+    <span>住宿 蚕室乐天世界酒店</span>
+    <span>ICML @ COEX 7/8–10</span>
+  </div>
+</div>
+<div class="edit-hint">
+  这份攻略完全可编辑 — 点击任意文字即可直接修改。右键另存为 HTML 可保留修改。打勾项可勾选追踪进度。
+</div>
+
+<div class="container">
+
+<!-- ═══════════ WEATHER ═══════════ -->
+<div class="section">
+  <div class="weather-bar">
+    <div>
+      <div class="temp">23-30°C</div>
+      <div class="desc">梅雨季 (장마) &middot; 高温潮湿</div>
+    </div>
+    <div class="tips">
+      <ul>
+        <li>随身携带折叠伞，午后常有阵雨</li>
+        <li>穿轻薄透气的夏装 + 带一件薄外套（室内空调 18-20°C）</li>
+        <li>防晒霜 SPF50+、防水凉鞋/运动鞋</li>
+        <li>下午 2-4 点多安排室内活动，避开暴雨高峰</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ DAY 1 ═══════════ -->
+<div class="section">
+  <h2 class="section-title">日程安排</h2>
+
+  <div class="day-card" id="day1">
+    <div class="day-header couple-day" onclick="toggleDay('day1')">
+      <div class="day-num">01</div>
+      <div class="day-info">
+        <div class="day-date">7月4日 周六</div>
+        <div class="day-title" contenteditable="true">抵达首尔 &middot; 蚕室初探</div>
+      </div>
+      <span class="day-badge badge-couple">一起</span>
+      <span class="toggle-icon">&#9660;</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">下午 抵达</div>
+          <div class="time-content" contenteditable="true">
+            <strong>仁川机场 → 蚕室乐天世界酒店</strong>
+            <div class="time-detail">
+              推荐方式：机场大巴 6006 路（直达蚕室站，约 80 分钟，₩18,000）<br>
+              或 AREX 快线 → 地铁 2 号线蚕室站（约 90 分钟，₩9,500）<br>
+              到酒店先 check-in，稍作休整
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">傍晚 17:00–</div>
+          <div class="time-content" contenteditable="true">
+            <strong>石村湖 (석촌호수) 散步</strong>
+            <div class="time-detail">
+              酒店步行 3 分钟。环湖一圈约 30 分钟，湖对面就是乐天世界塔夜景。<br>
+              旁边有石村湖咖啡街，适合坐下来看风景。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">晚上 19:00–</div>
+          <div class="time-content" contenteditable="true">
+            <strong>晚餐：蚕室乐天世界 Mall</strong>
+            <div class="time-detail">
+              B1 美食层选择丰富：百济参鸡汤（韩式传统）/ 明洞饺子（冷面+饺子）/ 校村炸鸡<br>
+              或出酒店步行 10 分钟到「芳荑洞美食街（방이동 먹자골목）」，本地烤肉一条街
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="spot">
+        <div class="spot-name">住宿定位 Tips</div>
+        <div class="spot-detail" contenteditable="true">
+          酒店与乐天世界主题乐园直连，从大堂可步行到乐天世界 Mall、乐天百货、免税店。<br>
+          地铁 2 号线蚕室站 (잠실역) 直通，去哪都方便。到 COEX 只需 2 站（5 分钟）。
+        </div>
+      </div>
+      <div class="spot" style="border-left-color: #e17055;">
+        <div class="spot-name">香奈儿购买 — 酒店楼下即可搞定</div>
+        <div class="spot-detail" contenteditable="true">
+          <b>乐天免税店 世界塔店</b>（AVENUEL 馆 8-9 层）就在酒店连通的乐天世界购物中心内，<b>有香奈儿专柜</b>。<br>
+          隔离霜和洗面奶属于化妆品，免税店购买后<b>国际品牌需在机场提货</b>（出发当天在登机口附近免税品提货处领取）。<br>
+          <b>建议到达后前两天就去下单</b>，避免热门色号/品项断货。营业时间 09:30-18:30。<br>
+          也可以提前在<b>乐天免税店官网/App</b> 线上下单，到机场直接提货，价格可能更优。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ DAY 2 ═══════════ -->
+  <div class="day-card" id="day2">
+    <div class="day-header couple-day" onclick="toggleDay('day2')">
+      <div class="day-num">02</div>
+      <div class="day-info">
+        <div class="day-date">7月5日 周日</div>
+        <div class="day-title" contenteditable="true">古宫韩屋 &middot; 经典首尔</div>
+      </div>
+      <span class="day-badge badge-couple">一起</span>
+      <span class="toggle-icon">&#9660;</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">上午 09:30–12:00</div>
+          <div class="time-content" contenteditable="true">
+            <strong>景福宫 (경복궁)</strong> <span class="transport">2号线→3号线 景福宫站 约40分钟</span>
+            <div class="time-detail">
+              首尔五大宫之首。10:00 和 14:00 有守门将交接仪式（约 20 分钟）。<br>
+              穿韩服免门票入场 — 宫门外有大量韩服租赁店（约 ₩15,000-20,000/2h）。<br>
+              <b>下雨天宫殿免门票</b>（降雨 &gt;10mm），雨中古宫别有韵味。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">午餐 12:00–13:30</div>
+          <div class="time-content" contenteditable="true">
+            <strong>土俗村参鸡汤 (토속촌삼계탕)</strong>
+            <div class="time-detail">
+              景福宫旁的名店，参鸡汤约 ₩19,000/份。<br>
+              或选「皇后名家」烤肉（宫外步行 5 分钟），品质高、游客相对少。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">下午 14:00–17:00</div>
+          <div class="time-content" contenteditable="true">
+            <strong>北村韩屋村 (북촌한옥마을) → 仁寺洞 (인사동)</strong>
+            <div class="time-detail">
+              从景福宫步行 15 分钟到北村。经典八景拍照路线，不赶时间慢慢走。<br>
+              一路下坡走到仁寺洞：传统工艺品街、Ssamziegil 创意市集、传统茶馆。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">晚上 18:00–</div>
+          <div class="time-content" contenteditable="true">
+            <strong>益善洞 (익선동) 晚餐 + 酒吧</strong>
+            <div class="time-detail">
+              从仁寺洞步行 5 分钟。韩屋改造的复古小巷，密集分布特色餐厅和酒吧。<br>
+              推荐：温粹 (온수) 韩式创意料理 / 익선동 121 鸡尾酒吧（韩屋庭院氛围）<br>
+              逛完溜达回钟路3街站坐地铁回酒店。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ DAY 3 ═══════════ -->
+  <div class="day-card" id="day3">
+    <div class="day-header couple-day" onclick="toggleDay('day3')">
+      <div class="day-num">03</div>
+      <div class="day-info">
+        <div class="day-date">7月6日 周一</div>
+        <div class="day-title" contenteditable="true">圣水洞咖啡 &middot; 汉江治愈</div>
+      </div>
+      <span class="day-badge badge-couple">一起</span>
+      <span class="toggle-icon">&#9660;</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">上午 10:00–13:00</div>
+          <div class="time-content" contenteditable="true">
+            <strong>圣水洞 (성수동) 咖啡街</strong> <span class="transport">2号线 圣水站 约15分钟</span>
+            <div class="time-detail">
+              「首尔的布鲁克林」— 废弃工厂改造的潮流圣地，周一人少体验更佳。<br>
+              路线：Cafe ONION（废墟风必打卡）→ NUDAKE（Gentle Monster 旗下，抹茶熔岩可颂）→ 大林仓库（画廊+咖啡）
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">午餐 13:00–14:30</div>
+          <div class="time-content" contenteditable="true">
+            <strong>圣水洞周边</strong>
+            <div class="time-detail">
+              BETON（盐面包天花板 + 招牌番茄汤）/ RAIN REPORT（雨的主题咖啡厅，彩虹牛角包）<br>
+              或在圣水洞的各种创意餐厅随意选一家坐下来。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">下午 15:00–17:00</div>
+          <div class="time-content" contenteditable="true">
+            <strong>首尔林 (서울숲) + 首尔国际庭院博览会</strong>
+            <div class="time-detail">
+              从圣水洞步行 10 分钟。2026 首尔国际庭院博览会正在举办（5.1–10.27），以「首尔，绿色文化」为主题，首尔林和纛岛汉江公园联动展出。免费参观，适合拍照散步。
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="evening-block" contenteditable="true">
+        <strong>傍晚 汉江치맥 (炸鸡+啤酒)</strong><br>
+        回蚕室后，在纛岛汉江公园或蚕室汉江公园铺上野餐垫。<br>
+        用「配达의민족 (外卖民族)」app 点炸鸡送到汉江公园，便利店买啤酒。<br>
+        看着夕阳和乐天世界塔，体验最地道的首尔夏夜。
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ DAY 4 ═══════════ -->
+  <div class="day-card" id="day4">
+    <div class="day-header couple-day" onclick="toggleDay('day4')">
+      <div class="day-num">04</div>
+      <div class="day-info">
+        <div class="day-date">7月7日 周二</div>
+        <div class="day-title" contenteditable="true">乐天世界 &middot; 空中观景台</div>
+      </div>
+      <span class="day-badge badge-couple">一起</span>
+      <span class="toggle-icon">&#9660;</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">全天 10:00–18:00</div>
+          <div class="time-content" contenteditable="true">
+            <strong>乐天世界 (롯데월드) 主题乐园</strong>
+            <div class="time-detail">
+              从酒店直达，无需交通！韩国最大室内主题乐园 + 户外「魔幻岛」。<br>
+              室内乐园完美应对雨天。必玩：法老的愤怒（室内过山车）、亚特兰蒂斯冒险、旋转木马。<br>
+              门票：成人 ₩62,000（提前在 Klook/Creatrip 买可便宜 ~20%）<br>
+              <b>Tips</b>：工作日人少很多；中午 12-2 点先吃饭避开排队高峰。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">傍晚 18:30–20:00</div>
+          <div class="time-content" contenteditable="true">
+            <strong>Seoul Sky 天空观景台 (서울스카이)</strong>
+            <div class="time-detail">
+              乐天世界塔 117-123 层，555 米高空 360° 俯瞰首尔。<br>
+              推荐买「日落套票」，日落时分的首尔太美了（7月日落约 19:40）。<br>
+              门票：成人 ₩29,000。117 层有 Sky Cafe 可以喝一杯。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">晚餐 20:30–</div>
+          <div class="time-content" contenteditable="true">
+            <strong>芳荑洞美食街 (방이동 먹자골목)</strong>
+            <div class="time-detail">
+              酒店步行 10 分钟，蚕室本地人的深夜食堂一条街。<br>
+              推荐：조선화로구이（朝鲜火炉烤肉）—韩牛专门店，五花肉外焦里嫩。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ DAY 5 ═══════════ -->
+  <div class="day-card" id="day5">
+    <div class="day-header split-day" onclick="toggleDay('day5')">
+      <div class="day-num">05</div>
+      <div class="day-info">
+        <div class="day-date">7月8日 周三</div>
+        <div class="day-title" contenteditable="true">分头行动 #1 &middot; ICML + SPA 放松</div>
+      </div>
+      <span class="day-badge badge-split">分头</span>
+      <span class="toggle-icon">&#9660;</span>
+    </div>
+    <div class="day-body">
+      <div class="split-container">
+        <div class="split-section boy">
+          <div class="split-label boy">他 &middot; ICML 主会议 Day 2</div>
+          <div class="timeline">
+            <div class="timeline-item boy-item">
+              <div class="time-label">全天</div>
+              <div class="time-content" contenteditable="true">
+                <strong>ICML @ COEX</strong> <span class="transport">2号线 三成站 2站/5分钟</span>
+                <div class="time-detail">
+                  三成站 5、6 号出口直通 COEX。<br>
+                  COEX Mall B1 有 Starfield Library（网红图书馆）和大量餐厅。<br>
+                  晚上 ICML 有 social events，可参加 networking。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="split-section girl">
+          <div class="split-label girl">她 &middot; 温泉 SPA + 林荫路漫步</div>
+          <div class="timeline">
+            <div class="timeline-item girl-item">
+              <div class="time-label">上午–下午</div>
+              <div class="time-content" contenteditable="true">
+                <strong>Spa Lei (스파레이)</strong>
+                <div class="time-detail">
+                  蚕室附近的女性专用温泉会馆，非常干净高端。<br>
+                  设施：红外线干蒸房、盐水泳池、淡水泳池、屋顶露天池、按摩室。<br>
+                  3 楼有网吧、DVD 室、化妆间。可以泡大半天。<br>
+                  费用：约 ₩20,000，搓澡另付 ₩30,000。<br>
+                  地铁 2 号线蚕室站附近，步行可达。
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item girl-item">
+              <div class="time-label">下午–傍晚</div>
+              <div class="time-content" contenteditable="true">
+                <strong>林荫路 (가로수길) 逛逛</strong> <span class="transport">3号线 新沙站</span>
+                <div class="time-detail">
+                  江南的时尚街区，两旁银杏树和精品店、设计师品牌、独立咖啡厅。<br>
+                  比明洞更有格调，适合慢慢逛。后面的小巷 (세로수길) 藏着更多宝藏店。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="evening-block" contenteditable="true">
+        <strong>晚上 可以汇合</strong><br>
+        COEX 到酒店只有 2 站地铁。可以约在蚕室一起吃晚饭。<br>
+        推荐：木廊台饭桌 (나무집밥상) — 小菜数量惊人的韩定食，上过多档美食节目。
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ DAY 6 ═══════════ -->
+  <div class="day-card" id="day6">
+    <div class="day-header split-day" onclick="toggleDay('day6')">
+      <div class="day-num">06</div>
+      <div class="day-info">
+        <div class="day-date">7月9日 周四</div>
+        <div class="day-title" contenteditable="true">分头行动 #2 &middot; ICML + 艺术休闲</div>
+      </div>
+      <span class="day-badge badge-split">分头</span>
+      <span class="toggle-icon">&#9660;</span>
+    </div>
+    <div class="day-body">
+      <div class="split-container">
+        <div class="split-section boy">
+          <div class="split-label boy">他 &middot; ICML 主会议 Day 3</div>
+          <div class="timeline">
+            <div class="timeline-item boy-item">
+              <div class="time-label">全天</div>
+              <div class="time-content" contenteditable="true">
+                <strong>ICML @ COEX</strong>
+                <div class="time-detail">
+                  主会议最后一天，invited talks + poster sessions。<br>
+                  午餐可以在 COEX Mall 解决，选择非常多。<br>
+                  下午如果提前结束，可以逛逛 COEX 的 Starfield Library。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="split-section girl">
+          <div class="split-label girl">她 &middot; 看展 + 益善洞下午茶</div>
+          <div class="timeline">
+            <div class="timeline-item girl-item">
+              <div class="time-label">上午 自然醒</div>
+              <div class="time-content" contenteditable="true">
+                <strong>睡到自然醒 + 酒店早餐</strong>
+                <div class="time-detail">
+                  乐天世界酒店自助早餐不错，或去石村湖边的咖啡厅慢慢享用。
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item girl-item">
+              <div class="time-label">下午 13:00–16:00</div>
+              <div class="time-content" contenteditable="true">
+                <strong>戈雅 (Goya) 大展 — 首尔艺术殿堂</strong> <span class="transport">3号线 南部客运站</span>
+                <div class="time-detail">
+                  Seoul Arts Center · Hangaram Art Museum<br>
+                  2026.6.26–9.30 特展，展出西班牙画家戈雅真迹。<br>
+                  首尔艺术殿堂本身建筑也很美，可以在园区散步。
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item girl-item">
+              <div class="time-label">下午 16:30–</div>
+              <div class="time-content" contenteditable="true">
+                <strong>益善洞 (익선동) 下午茶</strong>
+                <div class="time-detail">
+                  韩屋改造的文艺小巷。找一家传统茶馆（韩式柚子茶/红枣茶 + 韩果子），<br>
+                  或者去「동백양과 (椿洋菓)」吃日式和果子甜品。悠闲度过一个下午。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ DAY 7 ═══════════ -->
+  <div class="day-card" id="day7">
+    <div class="day-header split-day" onclick="toggleDay('day7')">
+      <div class="day-num">07</div>
+      <div class="day-info">
+        <div class="day-date">7月10日 周五</div>
+        <div class="day-title" contenteditable="true">分头行动 #3 &middot; ICML + 购物治愈</div>
+      </div>
+      <span class="day-badge badge-split">分头</span>
+      <span class="toggle-icon">&#9660;</span>
+    </div>
+    <div class="day-body">
+      <div class="split-container">
+        <div class="split-section boy">
+          <div class="split-label boy">他 &middot; ICML Workshop Day 1</div>
+          <div class="timeline">
+            <div class="timeline-item boy-item">
+              <div class="time-label">全天</div>
+              <div class="time-content" contenteditable="true">
+                <strong>ICML Workshops @ COEX</strong>
+                <div class="time-detail">
+                  Workshop 日通常可以选择性参加。<br>
+                  如果下午提前结束，可以去 COEX Mall 帮女朋友买免税品。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="split-section girl">
+          <div class="split-label girl">她 &middot; The Hyundai + 汝矣岛</div>
+          <div class="timeline">
+            <div class="timeline-item girl-item">
+              <div class="time-label">上午–下午</div>
+              <div class="time-content" contenteditable="true">
+                <strong>The Hyundai Seoul (더현대 서울)</strong> <span class="transport">5号线/9号线 汝矣岛站</span>
+                <div class="time-detail">
+                  2021 年开业的超级百货，被誉为「首尔最美商场」。<br>
+                  5 层 Sounds Forest 室内花园是打卡圣地。<br>
+                  B1 美食层网红餐厅云集，午餐在这里解决。<br>
+                  逛累了可以到顶层露台看汉江风景。
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item girl-item">
+              <div class="time-label">下午–傍晚</div>
+              <div class="time-content" contenteditable="true">
+                <strong>汝矣岛汉江公园 散步</strong>
+                <div class="time-detail">
+                  从 The Hyundai 步行 10 分钟到汉江边。<br>
+                  租一辆自行车沿汉江骑行，或者在草坪上发呆看江景。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="evening-block" contenteditable="true">
+        <strong>晚上 庆祝 ICML 结束！</strong><br>
+        推荐去江南站附近吃一顿好的。<br>
+        三肉家 Samyukga (삼육가) 江南总店 — 蜂窝切三层肉，排队名店值得一试。<br>
+        或 Gop (곱) — 烤牛肠专门店，上过多档美食节目。
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ DAY 8 ═══════════ -->
+  <div class="day-card" id="day8">
+    <div class="day-header couple-day" onclick="toggleDay('day8')">
+      <div class="day-num">08</div>
+      <div class="day-info">
+        <div class="day-date">7月11日 周六</div>
+        <div class="day-title" contenteditable="true">南山塔约会 &middot; 告别首尔</div>
+      </div>
+      <span class="day-badge badge-couple">一起</span>
+      <span class="toggle-icon">&#9660;</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">上午 10:00–13:00</div>
+          <div class="time-content" contenteditable="true">
+            <strong>明洞 (명동) 购物 + 伴手礼采购</strong> <span class="transport">2号线→4号线 明洞站 约30分钟</span>
+            <div class="time-detail">
+              韩妆圣地：<b>Olive Young 明洞旗舰店</b>（必逛，同事伴手礼在这一站搞定）。<br>
+              innisfree、LANEIGE 旗舰店。街边小吃：蛋糕鱼形烧、韩式辣年糕、芝士玉米热狗。<br>
+              <b>香奈儿备选</b>：如果蚕室乐天免税店断货，明洞乐天免税店 12 层也有香奈儿专柜（9-12 层免税区）。<br>
+              <b>伴手礼</b>：明洞附近的乐天超市（首尔站店）可一站式批量采购零食伴手礼（详见下方购物专区）。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">午餐 13:00–14:30</div>
+          <div class="time-content" contenteditable="true">
+            <strong>明洞饺子 (명동교자) 总店</strong>
+            <div class="time-detail">
+              明洞地标餐厅，手工刀削面 + 蒸饺，₩12,000/份。永远排队但翻台很快。<br>
+              或选「神仙雪浓汤 (신선설농탕)」— 乳白色牛骨汤，24 小时营业的老字号。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-label">下午 15:00–17:30</div>
+          <div class="time-content" contenteditable="true">
+            <strong>南山首尔塔 (N 서울타워)</strong>
+            <div class="time-detail">
+              从明洞步行到南山缆车站（约 15 分钟上坡路），坐缆车上山。<br>
+              缆车 ₩11,000 往返，塔观景台 ₩21,000。<br>
+              情侣必做：在爱情锁墙挂一把锁。<br>
+              天气好的话可以在塔下的八角亭咖啡厅坐坐等日落（19:40）。
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="evening-block" contenteditable="true">
+        <strong>最后一晚 告别晚餐</strong><br>
+        选项 A：回蚕室，在乐天世界塔 Seoul Sky 的「123 Lounge」高空餐厅俯瞰夜景用餐（需预约）<br>
+        选项 B：弘大 (홍대) 夜生活 — 街头表演、live house、夜市，首尔最有活力的地方<br>
+        选项 C：蚕室汉江公园最后一次치맥，对着乐天塔夜景告别首尔
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ DAY 9 ═══════════ -->
+  <div class="day-card" id="day9">
+    <div class="day-header couple-day" onclick="toggleDay('day9')">
+      <div class="day-num">09</div>
+      <div class="day-info">
+        <div class="day-date">7月12日 周日</div>
+        <div class="day-title" contenteditable="true">返程</div>
+      </div>
+      <span class="day-badge badge-depart">离开</span>
+      <span class="toggle-icon">&#9660;</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-label">早上</div>
+          <div class="time-content" contenteditable="true">
+            <strong>退房 → 仁川国际机场</strong>
+            <div class="time-detail">
+              提前 3 小时到机场（国际航班）。蚕室到仁川机场约 80-90 分钟。<br>
+              推荐 6006 机场大巴（蚕室站上车）或打车（约 ₩70,000-80,000）。<br>
+              <b>免税品提货</b>：过安检后，在登机口附近的<b>免税品提货处</b>领取香奈儿等免税店购买的国际品牌商品。<br>
+              <b>退税 Tips</b>：在机场出发层 D/J 柜台附近有自助退税机（Olive Young 等市内购物满 ₩30,000 可退税），大件物品需先退税再托运。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PRACTICAL INFO ═══════════ -->
+<div class="section">
+  <h2 class="section-title">实用信息</h2>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>交通</h3>
+      <ul>
+        <li><span class="icon">🚇</span><span contenteditable="true"><b>T-money 卡</b> — 便利店购买（₩4,000），地铁/公交/便利店通用，单程 ₩1,400 起</span></li>
+        <li><span class="icon">🚇</span><span contenteditable="true"><b>Climate Card 游客版</b> — 地铁公交无限坐，适合每天出行多的人</span></li>
+        <li><span class="icon">🚕</span><span contenteditable="true"><b>打车</b> — 用 KakaoT app 叫车，起步价 ₩4,800。深夜加价 20%</span></li>
+        <li><span class="icon">📍</span><span contenteditable="true"><b>导航</b> — Google Maps 在韩国不好用，用 <b>Naver Map</b> 或 <b>KakaoMap</b></span></li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>通讯 & 支付</h3>
+      <ul>
+        <li><span class="icon">📱</span><span contenteditable="true"><b>eSIM</b> — 出发前在 Airalo/Klook 买韩国 eSIM，落地即用。实体 SIM 可在机场 KT/SKT 柜台买</span></li>
+        <li><span class="icon">💳</span><span contenteditable="true"><b>支付</b> — 信用卡/Visa/Mastercard 几乎通用，小店可能只收现金</span></li>
+        <li><span class="icon">💱</span><span contenteditable="true"><b>换汇</b> — 明洞换钱所汇率最好（大使馆/一品香）。仁川机场汇率差，少换</span></li>
+        <li><span class="icon">🈚</span><span contenteditable="true"><b>翻译</b> — Papago app（Naver 出品），韩语翻译比 Google 准</span></li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>美食必吃清单</h3>
+      <ul>
+        <li><span class="icon">🥩</span><span contenteditable="true"><b>韩牛烤肉</b> — 芳荑洞美食街 / 三肉家 Samyukga</span></li>
+        <li><span class="icon">🍗</span><span contenteditable="true"><b>炸鸡</b> — 校村 / BHC / 酒店叫外卖到汉江</span></li>
+        <li><span class="icon">🍜</span><span contenteditable="true"><b>冷面</b> — 夏天必吃！乙支面屋 / 明洞咸兴面屋</span></li>
+        <li><span class="icon">🥘</span><span contenteditable="true"><b>部队锅</b> — 놀부부대찌개 连锁，料多量大</span></li>
+        <li><span class="icon">🍧</span><span contenteditable="true"><b>刨冰 (빙수)</b> — 夏天消暑神器，Sulbing 雪冰连锁 / 咖啡厅都有</span></li>
+        <li><span class="icon">🌮</span><span contenteditable="true"><b>紫菜包饭</b> — 便利店就有，GS25 的三角紫菜包饭是深夜好伙伴</span></li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>文化小贴士</h3>
+      <ul>
+        <li><span class="icon">🙅</span><span contenteditable="true"><b>不用给小费</b> — 韩国没有小费文化</span></li>
+        <li><span class="icon">👟</span><span contenteditable="true"><b>进屋脱鞋</b> — 韩屋餐厅/试衣间记得脱鞋</span></li>
+        <li><span class="icon">🍶</span><span contenteditable="true"><b>倒酒礼仪</b> — 给长辈倒酒双手持瓶，接酒双手接杯</span></li>
+        <li><span class="icon">🏪</span><span contenteditable="true"><b>便利店</b> — GS25/CU/7-11 遍地都是，很多有座位，是便宜吃饭的好地方</span></li>
+        <li><span class="icon">🚻</span><span contenteditable="true"><b>厕所</b> — 地铁站/商场都有干净的免费厕所</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SHOPPING GUIDE ═══════════ -->
+<div class="section">
+  <h2 class="section-title">购物专区：香奈儿 & 同事伴手礼</h2>
+
+  <div class="info-grid">
+    <div class="info-card" style="grid-column: 1 / -1; border-top: 4px solid #e17055;">
+      <h3 style="font-size: 1.1em;">香奈儿隔离 + 洗面奶 — 购买方案</h3>
+      <table class="cost-table" style="margin-top: 12px;">
+        <thead>
+          <tr>
+            <th>渠道</th>
+            <th>地点</th>
+            <th>优势</th>
+            <th>建议时间</th>
+          </tr>
+        </thead>
+        <tbody contenteditable="true">
+          <tr style="background: #fff8f0;">
+            <td><b>首选：乐天免税店 世界塔店</b></td>
+            <td>酒店连通 AVENUEL 8-9F</td>
+            <td>免税价最划算，走路就到，有中文导购</td>
+            <td>7/5 或 7/6 白天（早去避免断货）</td>
+          </tr>
+          <tr>
+            <td>备选：乐天免税店 明洞总店</td>
+            <td>明洞乐天百货 12F</td>
+            <td>品牌最全的免税店，逛明洞顺路</td>
+            <td>7/11 上午（明洞购物日）</td>
+          </tr>
+          <tr>
+            <td>备选：新罗免税店</td>
+            <td>中区东湖路（近梨泰院）</td>
+            <td>全职员中文服务，VIP 折扣力度大</td>
+            <td>需额外安排，不在主线路上</td>
+          </tr>
+          <tr>
+            <td>线上：乐天免税店官网/App</td>
+            <td>线上下单 → 机场提货</td>
+            <td>网上价常比柜台更便宜，不怕断货可锁库存</td>
+            <td>出发前或抵达后随时下单</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 12px; padding: 12px 16px; background: #f8f9fa; border-radius: 8px; font-size: 0.9em;" contenteditable="true">
+        <b>注意事项：</b><br>
+        &bull; 免税店购买的<b>国际品牌</b>（香奈儿、迪奥等）<b>不能当场拿走</b>，需在机场出境后的提货处领取<br>
+        &bull; 韩国本土品牌（雪花秀、后等）可以当场拿走<br>
+        &bull; 建议<b>提前在官网注册会员</b>，经常有新人优惠券和积分返现<br>
+        &bull; 香奈儿隔离参考免税价约 ₩45,000-55,000（比国内专柜便宜 15-25%）
+      </div>
+    </div>
+  </div>
+
+  <div class="info-grid" style="margin-top: 20px;">
+    <div class="info-card" style="grid-column: 1 / -1; border-top: 4px solid #6c5ce7;">
+      <h3 style="font-size: 1.1em;">25 位同事伴手礼方案（约 19 女 + 6 男，人均 ¥15-40）</h3>
+      <p style="font-size: 0.85em; color: var(--text-light); margin-bottom: 16px;" contenteditable="true">
+        25 岁同龄同事，选有韩国特色、颜值在线、拿出手不掉价的小礼物。女生和男生分开选，以下方案可混搭：
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: #fdf2f8; border-radius: 12px; padding: 16px;">
+          <div style="font-weight: 700; color: #e84393; margin-bottom: 8px;" contenteditable="true">女同事 ~19 人 — 小确幸组合</div>
+          <ul style="font-size: 0.88em; padding-left: 16px;" contenteditable="true">
+            <li style="border: none; display: list-item; padding: 3px 0;"><b>Kakao Friends 桌面小摆件/磁吸夹</b> — Ryan、Apeach 等，放工位超治愈，约 ₩5,000-8,000（¥26-42）</li>
+            <li style="border: none; display: list-item; padding: 3px 0;"><b>韩国药果 (약과) 礼盒</b> — GD 同款传统点心，近年爆火，精致有文化感，约 ₩5,000-8,000/盒</li>
+            <li style="border: none; display: list-item; padding: 3px 0;"><b>韩国设计香薰片/车载香氛</b> — Artbox / 10x10 有很多韩国小众设计款，办公桌放一个心情好，约 ₩4,000-7,000</li>
+            <li style="border: none; display: list-item; padding: 3px 0;"><b>Index Caramel 手工牛奶糖</b> — 入口即化，包装精美适合送人，约 ₩6,000/盒（¥32）</li>
+            <li style="border: none; display: list-item; padding: 3px 0;">关系近的 → <b>Kakao 摆件 + 药果礼盒</b>（人均 ¥45-60）</li>
+            <li style="border: none; display: list-item; padding: 3px 0;">一般同事 → <b>香薰片/牛奶糖 + 蜂蜜黄油杏仁小包</b>（人均 ¥20-30）</li>
+          </ul>
+        </div>
+        <div style="background: #e8f4fd; border-radius: 12px; padding: 16px;">
+          <div style="font-weight: 700; color: #0984e3; margin-bottom: 8px;" contenteditable="true">男同事 ~6 人 — 有意思 + 实用</div>
+          <ul style="font-size: 0.88em; padding-left: 16px;" contenteditable="true">
+            <li style="border: none; display: list-item; padding: 3px 0;"><b>韩国烧酒 mini 套装</b> — 彩色小瓶装（草莓/葡萄/桃子味），一组 4 瓶约 ₩8,000（¥42），颜值高话题性强</li>
+            <li style="border: none; display: list-item; padding: 3px 0;"><b>Kakao Friends 杯垫/鼠标垫</b> — 实用且有趣，办公桌上每天都能用，约 ₩5,000-8,000</li>
+            <li style="border: none; display: list-item; padding: 3px 0;"><b>韩国精品挂耳咖啡</b> — Fritz / Anthracite 等首尔本地精品咖啡品牌出的挂耳包，比速溶有格调，约 ₩6,000-10,000/盒</li>
+            <li style="border: none; display: list-item; padding: 3px 0;"><b>蜂蜜黄油杏仁大包</b> — 搭一包零食凑手感，₩3,500（¥18）</li>
+            <li style="border: none; display: list-item; padding: 3px 0;">推荐组合 → <b>烧酒 mini + 挂耳咖啡</b> 或 <b>Kakao 鼠标垫 + 杏仁</b>（人均 ¥40-55）</li>
+          </ul>
+        </div>
+        <div style="background: #f8f9fa; border-radius: 12px; padding: 16px;">
+          <div style="font-weight: 700; color: #636e72; margin-bottom: 8px;" contenteditable="true">公区分享装（可选加购）</div>
+          <ul style="font-size: 0.88em; padding-left: 16px;" contenteditable="true">
+            <li style="border: none; display: list-item; padding: 3px 0;"><b>养乐多软糖 / 烧酒软糖</b> — 韩国限定造型，₩2,000/袋，丢茶水间几分钟被抢光</li>
+            <li style="border: none; display: list-item; padding: 3px 0;"><b>Market O 布朗尼 + 蜂蜜黄油杏仁</b> — 买几盒拆开放公区，覆盖名单外的同事</li>
+            <li style="border: none; display: list-item; padding: 3px 0;">约 ¥50-80 搞定，不用精确到人，大家随手拿</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top: 16px; padding: 12px 16px; background: #f8f9fa; border-radius: 8px; font-size: 0.88em;" contenteditable="true">
+        <b>采购路线建议（7/11 一天搞定）：</b><br>
+        &bull; <b>上午 明洞</b>：Kakao Friends 明洞旗舰店（文创小物）→ Artbox/10x10（香薰片、设计杂货）→ 街边药果专卖店 / Index Caramel<br>
+        &bull; <b>下午 回程顺路</b>：<b>乐天超市首尔站店</b>（首尔站 1 号出口，营业到 23:00）批量扫零食 + 烧酒 mini + 蜂蜜黄油杏仁<br>
+        &bull; <b>精品咖啡</b>：Fritz Coffee 延南洞店 或 圣水洞门店（7/6 逛圣水洞时顺便买）<br>
+        <b>行李空间 Tip：</b>带一个可折叠行李袋（Daiso ₩3,000）备用。烧酒小瓶注意托运，不能随身带上飞机。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ COST ESTIMATE ═══════════ -->
+<div class="section">
+  <h2 class="section-title">费用参考（两人合计，不含机票和酒店）</h2>
+  <div class="info-card" style="overflow-x: auto;">
+    <table class="cost-table">
+      <thead>
+        <tr>
+          <th>项目</th>
+          <th>预估费用 (₩)</th>
+          <th>预估费用 (¥)</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody contenteditable="true">
+        <tr><td>机场往返交通</td><td>72,000</td><td>~¥380</td><td>机场大巴×2人×往返</td></tr>
+        <tr><td>市内交通（8天）</td><td>120,000</td><td>~¥630</td><td>地铁+偶尔打车</td></tr>
+        <tr><td>餐饮（8天）</td><td>800,000</td><td>~¥4,200</td><td>人均每餐 ₩15,000-25,000</td></tr>
+        <tr><td>乐天世界门票×2</td><td>124,000</td><td>~¥650</td><td>提前买有折扣</td></tr>
+        <tr><td>Seoul Sky 观景台×2</td><td>58,000</td><td>~¥305</td><td></td></tr>
+        <tr><td>南山塔缆车+观景台×2</td><td>64,000</td><td>~¥336</td><td></td></tr>
+        <tr><td>Spa Lei</td><td>50,000</td><td>~¥263</td><td>含搓澡</td></tr>
+        <tr><td>韩服租赁×2</td><td>40,000</td><td>~¥210</td><td>2小时</td></tr>
+        <tr><td>香奈儿隔离+洗面奶（代购）</td><td>~100,000</td><td>~¥530</td><td>免税店价，机场提货</td></tr>
+        <tr><td>同事伴手礼（25人）</td><td>~130,000</td><td>~¥680</td><td>方案C混搭，人均¥25左右</td></tr>
+        <tr style="font-weight:700; background:#f0f8ff;">
+          <td>合计（含代购+伴手礼）</td><td>~₩1,558,000</td><td>~¥8,200</td><td>汇率按 ₩190 ≈ ¥1</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ CHECKLIST ═══════════ -->
+<div class="section">
+  <h2 class="section-title">出发前清单</h2>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>证件 & 预订</h3>
+      <ul class="checklist">
+        <li><input type="checkbox"><span contenteditable="true">护照（有效期 > 6 个月）</span></li>
+        <li><input type="checkbox"><span contenteditable="true">韩国免签确认（中国护照 2025 起免签 / 或 K-ETA 申请）</span></li>
+        <li><input type="checkbox"><span contenteditable="true">ICML 注册确认邮件</span></li>
+        <li><input type="checkbox"><span contenteditable="true">机票预订确认</span></li>
+        <li><input type="checkbox"><span contenteditable="true">乐天世界门票（提前在 Klook/Creatrip 购买更便宜）</span></li>
+        <li><input type="checkbox"><span contenteditable="true">Seoul Sky 门票</span></li>
+        <li><input type="checkbox"><span contenteditable="true">eSIM / WiFi 蛋 预订</span></li>
+        <li><input type="checkbox"><span contenteditable="true">乐天免税店官网注册会员 + 领新人优惠券（可提前线上下单香奈儿）</span></li>
+        <li><input type="checkbox"><span contenteditable="true">确认代购清单：香奈儿隔离型号/色号、洗面奶规格</span></li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>行李 & 准备</h3>
+      <ul class="checklist">
+        <li><input type="checkbox"><span contenteditable="true">折叠伞（梅雨季必备！）</span></li>
+        <li><input type="checkbox"><span contenteditable="true">防晒霜 SPF50+</span></li>
+        <li><input type="checkbox"><span contenteditable="true">薄外套/披肩（室内空调冷）</span></li>
+        <li><input type="checkbox"><span contenteditable="true">防水鞋/凉鞋</span></li>
+        <li><input type="checkbox"><span contenteditable="true">充电宝 + 转换插头（韩国用圆头两孔 220V）</span></li>
+        <li><input type="checkbox"><span contenteditable="true">下载 app：Naver Map / KakaoMap / Papago / KakaoT</span></li>
+        <li><input type="checkbox"><span contenteditable="true">少量韩元现金（机场先换 ₩100,000，到明洞再换更多）</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ KEY EVENTS ═══════════ -->
+<div class="section">
+  <h2 class="section-title">同期活动 & 演出</h2>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>展览</h3>
+      <ul>
+        <li><span class="icon">🎨</span><span contenteditable="true"><b>戈雅大展</b> — Seoul Arts Center, 6.26–9.30</span></li>
+        <li><span class="icon">🌿</span><span contenteditable="true"><b>首尔国际庭院博览会</b> — 首尔林/纛岛, 5.1–10.27</span></li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>演出 & 节日</h3>
+      <ul>
+        <li><span class="icon">🎵</span><span contenteditable="true"><b>여우락 (Yeowoorak) 音乐节</b> — 国立剧场, 7.3–7.25，传统与现代融合音乐</span></li>
+        <li><span class="icon">🎤</span><span contenteditable="true"><b>ICML 2026</b> — COEX, 7.6–7.11</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<div class="footer">
+  <p>
+    由 Claude 制作 &middot; 2026.07.03 &middot; 信息来源：
+    <a href="https://icml.cc/Conferences/2026" target="_blank">ICML 2026</a> &middot;
+    <a href="https://english.visitseoul.net/" target="_blank">Visit Seoul</a> &middot;
+    <a href="https://creatrip.com/en/blog/347" target="_blank">Creatrip</a> &middot;
+    <a href="https://www.letseoul.com/zh/articles/seoul-weather-packing-guide-2026" target="_blank">LetSeoul</a>
+  </p>
+  <p style="margin-top:8px; opacity:0.7;">
+    点击任意文字可直接编辑 &middot; Ctrl/Cmd+P 可打印为 PDF &middot; 右键另存为保留修改
+  </p>
+</div>
+
+</div><!-- /container -->
+
+<script>
+function toggleDay(id) {
+  document.getElementById(id).classList.toggle('collapsed');
+}
+</script>
+</body>
+</html>
